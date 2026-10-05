@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Labora | Smart Lab Equipment Hub</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Inter,Segoe UI,Arial,sans-serif;
+}
+
+body{
+    background:#f6f8fc;
+    color:#172033;
+}
+
+/* NAVBAR */
+
+nav{
+    height:72px;
+    background:white;
+    border-bottom:1px solid #e8ebf2;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 7%;
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:22px;
+    font-weight:800;
+    color:#172033;
+}
+
+.logo-box{
+    width:38px;
+    height:38px;
+    border-radius:11px;
+    background:#4f46e5;
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-weight:bold;
+}
+
+.nav-links{
+    display:flex;
+    gap:30px;
+    color:#64748b;
+    font-size:14px;
+}
+
+.nav-links span{
+    cursor:pointer;
+}
+
+.nav-links span:hover{
+    color:#4f46e5;
+}
+
+.profile{
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    background:#e0e7ff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#4338ca;
+    font-weight:bold;
+}
+
+/* HERO */
+
+.hero{
+    padding:65px 7% 45px;
+    background:linear-gradient(135deg,#eef2ff,#ffffff);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:40px;
+}
+
+.hero-text{
+    max-width:650px;
+}
+
+.tag{
+    display:inline-block;
+    padding:7px 13px;
+    background:#e0e7ff;
+    color:#4338ca;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:600;
+    margin-bottom:18px;
+}
+
+.hero h1{
+    font-size:48px;
+    line-height:1.1;
+    margin-bottom:17px;
+    letter-spacing:-1.5px;
+}
+
+.hero h1 span{
+    color:#4f46e5;
+}
+
+.hero p{
+    color:#64748b;
+    line-height:1.7;
+    font-size:16px;
+    margin-bottom:25px;
+}
+
+.hero-search{
+    display:flex;
+    background:white;
+    border:1px solid #e2e8f0;
+    border-radius:12px;
+    padding:6px;
+    max-width:560px;
+    box-shadow:0 8px 25px rgba(15,23,42,.07);
+}
+
+.hero-search input{
+    flex:1;
+    border:none;
+    outline:none;
+    padding:12px;
+    font-size:14px;
+}
+
+.hero-search button{
+    background:#4f46e5;
+    color:white;
+    border:none;
+    border-radius:8px;
+    padding:0 22px;
+    cursor:pointer;
+}
+
+.hero-search button:hover{
+    background:#4338ca;
+}
+
+.hero-illustration{
+    width:310px;
+    height:240px;
+    border-radius:25px;
+    background:white;
+    box-shadow:0 15px 40px rgba(15,23,42,.1);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+}
+
+.lab-icon{
+    font-size:90px;
+}
+
+.floating{
+    position:absolute;
+    padding:10px 14px;
+    background:white;
+    border-radius:10px;
+    box-shadow:0 5px 20px rgba(0,0,0,.1);
+    font-size:12px;
+    font-weight:600;
+}
+
+.float-one{
+    top:20px;
+    right:-25px;
+}
+
+.float-two{
+    bottom:25px;
+    left:-25px;
+}
+
+/* MAIN */
+
+.container{
+    width:86%;
+    margin:auto;
+    padding:35px 0 70px;
+}
+
+.top-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:22px;
+}
+
+.top-row h2{
+    font-size:24px;
+}
+
+.top-row p{
+    color:#64748b;
+    font-size:13px;
+    margin-top:5px;
+}
+
+/* FILTERS */
+
+.filters{
+    display:flex;
+    gap:10px;
+    margin-bottom:25px;
+    flex-wrap:wrap;
+}
+
+.filter{
+    border:1px solid #e2e8f0;
+    background:white;
+    padding:9px 16px;
+    border-radius:20px;
+    cursor:pointer;
+    font-size:13px;
+    color:#64748b;
+}
+
+.filter.active,
+.filter:hover{
+    background:#4f46e5;
+    color:white;
+    border-color:#4f46e5;
+}
+
+/* CARDS */
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.card{
+    background:white;
+    border:1px solid #e8ebf2;
+    border-radius:16px;
+    padding:20px;
+    transition:.25s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 15px 35px rgba(15,23,42,.09);
+}
+
+.card-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:18px;
+}
+
+.equipment-icon{
+    width:52px;
+    height:52px;
+    background:#eef2ff;
+    border-radius:13px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:27px;
+}
+
+.status{
+    font-size:11px;
+    padding:6px 9px;
+    border-radius:15px;
+    font-weight:600;
+}
+
+.available{
+    background:#dcfce7;
+    color:#15803d;
+}
+
+.limited{
+    background:#fef3c7;
+    color:#a16207;
+}
+
+.card h3{
+    font-size:17px;
+    margin-bottom:7px;
+}
+
+.card .location{
+    font-size:12px;
+    color:#94a3b8;
+    margin-bottom:16px;
+}
+
+.details{
+    display:flex;
+    justify-content:space-between;
+    font-size:12px;
+    color:#64748b;
+    padding:12px 0;
+    border-top:1px solid #f1f5f9;
+    border-bottom:1px solid #f1f5f9;
+}
+
+.borrow-btn{
+    width:100%;
+    margin-top:15px;
+    padding:11px;
+    border:none;
+    border-radius:8px;
+    background:#172033;
+    color:white;
+    cursor:pointer;
+    font-size:13px;
+    font-weight:600;
+}
+
+.borrow-btn:hover{
+    background:#4f46e5;
+}
+
+.borrow-btn.borrowed{
+    background:#e2e8f0;
+    color:#64748b;
+    cursor:default;
+}
+
+/* EMPTY */
+
+.empty{
+    display:none;
+    text-align:center;
+    padding:50px;
+    color:#64748b;
+}
+
+/* MODAL */
+
+.modal-bg{
+    position:fixed;
+    inset:0;
+    background:rgba(15,23,42,.55);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:200;
+}
+
+.modal{
+    width:400px;
+    background:white;
+    border-radius:18px;
+    padding:28px;
+    box-shadow:0 25px 70px rgba(0,0,0,.2);
+}
+
+.modal h2{
+    margin-bottom:8px;
+}
+
+.modal p{
+    color:#64748b;
+    font-size:14px;
+    line-height:1.6;
+    margin-bottom:20px;
+}
+
+.modal input,
+.modal select{
+    width:100%;
+    padding:12px;
+    border:1px solid #dbe1ea;
+    border-radius:8px;
+    margin-bottom:12px;
+    outline:none;
+}
+
+.modal-buttons{
+    display:flex;
+    gap:10px;
+}
+
+.confirm{
+    flex:1;
+    border:none;
+    padding:11px;
+    border-radius:8px;
+    background:#4f46e5;
+    color:white;
+    cursor:pointer;
+}
+
+.cancel{
+    flex:1;
+    border:none;
+    padding:11px;
+    border-radius:8px;
+    background:#f1f5f9;
+    cursor:pointer;
+}
+
+/* FOOTER */
+
+footer{
+    background:#172033;
+    color:#94a3b8;
+    text-align:center;
+    padding:25px;
+    font-size:12px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+    .grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .hero-illustration{
+        display:none;
+    }
+}
+
+@media(max-width:600px){
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+    .nav-links{
+        display:none;
+    }
+
+    .hero h1{
+        font-size:36px;
+    }
+
+    .hero{
+        padding-top:40px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<nav>
+
+    <div class="logo">
+        <div class="logo-box">L</div>
+        Labora
+    </div>
+
+    <div class="nav-links">
+        <span>Dashboard</span>
+        <span>Equipment</span>
+        <span>My Requests</span>
+        <span>Help</span>
+    </div>
+
+    <div class="profile">DP</div>
+
+</nav>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="hero-text">
+
+        <div class="tag">SMART LAB MANAGEMENT</div>
+
+        <h1>
+            Find the right<br>
+            <span>equipment.</span>
+        </h1>
+
+        <p>
+            Explore laboratory equipment, check real-time availability
+            and request what you need without walking around the lab.
+        </p>
+
+        <div class="hero-search">
+
+            <input
+                id="search"
+                type="text"
+                placeholder="Search equipment..."
+                onkeyup="searchEquipment()"
+            >
+
+            <button onclick="searchEquipment()">
+                Search
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="hero-illustration">
+
+        <div class="lab-icon">🔬</div>
+
+        <div class="floating float-one">
+            ✓ 12 Available
+        </div>
+
+        <div class="floating float-two">
+            Lab 204
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CONTENT -->
+
+<main class="container">
+
+    <div class="top-row">
+
+        <div>
+            <h2>Equipment Catalogue</h2>
+            <p>Browse equipment available across campus laboratories.</p>
+        </div>
+
+    </div>
+
+
+    <!-- FILTERS -->
+
+    <div class="filters">
+
+        <button class="filter active"
+                onclick="filterItems('all',this)">
+            All
+        </button>
+
+        <button class="filter"
+                onclick="filterItems('electronics',this)">
+            Electronics
+        </button>
+
+        <button class="filter"
+                onclick="filterItems('computing',this)">
+            Computing
+        </button>
+
+        <button class="filter"
+                onclick="filterItems('iot',this)">
+            IoT
+        </button>
+
+        <button class="filter"
+                onclick="filterItems('measurement',this)">
+            Measurement
+        </button>
+
+    </div>
+
+
+    <!-- EQUIPMENT -->
+
+    <div class="grid" id="equipmentGrid">
+
+
+        <div class="card equipment"
+             data-category="electronics"
+             data-name="Digital Oscilloscope">
+
+            <div class="card-top">
+
+                <div class="equipment-icon">〽️</div>
+
+                <span class="status available">
+                    Available
+                </span>
+
+            </div>
+
+            <h3>Digital Oscilloscope</h3>
+
+            <div class="location">
+                Electronics Lab · EQ-101
+            </div>
+
+            <div class="details">
+                <span>Qty: 4</span>
+                <span>Lab 204</span>
+            </div>
+
+            <button class="borrow-btn"
+                    onclick="openModal('Digital Oscilloscope')">
+                Request Equipment
+            </button>
+
+        </div>
+
+
+        <div class="card equipment"
+             data-category="iot"
+             data-name="Arduino Mega Kit">
+
+            <div class="card-top">
+
+                <div class="equipment-icon">⚙️</div>
+
+                <span class="status available">
+                    Available
+                </span>
+
+            </div>
+
+            <h3>Arduino Mega Kit</h3>
+
+            <div class="location">
+                IoT Laboratory · EQ-204
+            </div>
+
+            <div class="details">
+                <span>Qty: 8</span>
+                <span>Lab 108</span>
+            </div>
+
+            <button class="borrow-btn"
+                    onclick="openModal('Arduino Mega Kit')">
+                Request Equipment
+            </button>
+
+        </div>
+
+
+        <div class="card equipment"
+             data-category="computing"
+             data-name="Raspberry Pi 5 Kit">
+
+            <div class="card-top">
+
+                <div class="equipment-icon">💻</div>
+
+                <span class="status available">
+                    Available
+                </span>
+
+            </div>
+
+            <h3>Raspberry Pi 5 Kit</h3>
+
+            <div class="location">
+                Computing Lab · EQ-221
+            </div>
+
+            <div class="details">
+                <span>Qty: 6</span>
+                <span>Lab 305</span>
+            </div>
+
+            <button class="borrow-btn"
+                    onclick="openModal('Raspberry Pi 5 Kit')">
+                Request Equipment
+            </button>
+
+        </div>
+
+
+        <div class="card equipment"
+             data-category="measurement"
+             data-name="Digital Multimeter">
+
+            <div class="card-top">
+
+                <div class="equipment-icon">📟</div>
+
+                <span class="status available">
+                    Available
+                </span>
+
+            </div>
+
+            <h3>Digital Multimeter</h3>
+
+            <div class="location">
+                Electrical Lab · EQ-112
+            </div>
+
+            <div class="details">
+                <span>Qty: 12</span>
+                <span>Lab 102</span>
+            </div>
+
+            <button class="borrow-btn"
+                    onclick="openModal('Digital Multimeter')">
+                Request Equipment
+            </button>
+
+        </div>
+
+
+        <div class="card equipment"
+             data-category="electronics"
+             data-name="Logic Analyzer">
+
+            <div class="card-top">
+
+                <div class="equipment-icon">📊</div>
+
+                <span class="status limited">
+                    Limited
+                </span>
+
+            </div>
+
+            <h3>Logic Analyzer</h3>
+
+            <div class="location">
+                Digital Systems Lab · EQ-145
+            </div>
+
+            <div class="details">
+                <span>Qty: 2</span>
+                <span>Lab 207</span>
+            </div>
+
+            <button class="borrow-btn"
+                    onclick="openModal('Logic Analyzer')">
+                Request Equipment
+            </button>
+
+        </div>
+
+
+        <div class="card equipment"
+             data-category="iot"
+             data-name="ESP32 Development Kit">
+
+            <div class="card-top">
+
+                <div class="equipment-icon">📡</div>
+
+                <span class="status available">
+                    Available
+                </span>
+
+            </div>
+
+            <h3>ESP32 Development Kit</h3>
+
+            <div class="location">
+                IoT Laboratory · EQ-318
+            </div>
+
+            <div class="details">
+                <span>Qty: 10</span>
+                <span>Lab 108</span>
+            </div>
+
+            <button class="borrow-btn"
+                    onclick="openModal('ESP32 Development Kit')">
+                Request Equipment
+            </button>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="empty" id="empty">
+        No equipment found.
+    </div>
+
+</main>
+
+
+<footer>
+    Labora · Smart Laboratory Equipment Hub · DevOps Demonstration
+</footer>
+
+
+<!-- MODAL -->
+
+<div class="modal-bg" id="modal">
+
+    <div class="modal">
+
+        <h2>Request Equipment</h2>
+
+        <p>
+            Submit a request to borrow
+            <strong id="selectedItem"></strong>.
+        </p>
+
+        <input
+            type="text"
+            placeholder="Your name"
+            id="studentName"
+        >
+
+        <select id="duration">
+
+            <option value="">Select borrowing duration</option>
+            <option>2 Hours</option>
+            <option>1 Day</option>
+            <option>3 Days</option>
+            <option>1 Week</option>
+
+        </select>
+
+        <div class="modal-buttons">
+
+            <button class="cancel"
+                    onclick="closeModal()">
+                Cancel
+            </button>
+
+            <button class="confirm"
+                    onclick="submitRequest()">
+                Submit Request
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* SEARCH */
+
+function searchEquipment(){
+
+    let value =
+        document.getElementById("search").value.toLowerCase();
+
+    let cards =
+        document.querySelectorAll(".equipment");
+
+    let found = false;
+
+    cards.forEach(card => {
+
+        let name =
+            card.dataset.name.toLowerCase();
+
+        if(name.includes(value)){
+            card.style.display = "block";
+            found = true;
+        }
+        else{
+            card.style.display = "none";
+        }
+
+    });
+
+    document.getElementById("empty").style.display =
+        found ? "none" : "block";
+}
+
+
+/* FILTER */
+
+function filterItems(category,button){
+
+    document.querySelectorAll(".filter")
+        .forEach(btn => btn.classList.remove("active"));
+
+    button.classList.add("active");
+
+    let cards =
+        document.querySelectorAll(".equipment");
+
+    let found = false;
+
+    cards.forEach(card => {
+
+        if(category === "all" ||
+           card.dataset.category === category){
+
+            card.style.display = "block";
+            found = true;
+
+        }else{
+
+            card.style.display = "none";
+
+        }
+
+    });
+
+    document.getElementById("empty").style.display =
+        found ? "none" : "block";
+}
+
+
+/* MODAL */
+
+function openModal(item){
+
+    document.getElementById("selectedItem")
+        .innerText = item;
+
+    document.getElementById("modal")
+        .style.display = "flex";
+}
+
+
+function closeModal(){
+
+    document.getElementById("modal")
+        .style.display = "none";
+}
+
+
+function submitRequest(){
+
+    let name =
+        document.getElementById("studentName").value;
+
+    let duration =
+        document.getElementById("duration").value;
+
+    if(name === "" || duration === ""){
+
+        alert("Please enter your name and select a duration.");
+
+        return;
+    }
+
+    alert(
+        "Request submitted successfully!\n\n" +
+        "Student: " + name +
+        "\nEquipment: " +
+        document.getElementById("selectedItem").innerText +
+        "\nDuration: " + duration
+    );
+
+    closeModal();
+
+    document.getElementById("studentName").value = "";
+    document.getElementById("duration").value = "";
+
+}
+
+</script>
+
+</body>
+</html>
